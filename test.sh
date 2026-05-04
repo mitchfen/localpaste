@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# QuickPaste Test Runner
+# Localpaste Test Runner
 # Simple script to run tests with various options
 
 set -e
@@ -13,7 +13,7 @@ NC='\033[0m' # No Color
 
 show_usage() {
     cat << EOF
-QuickPaste Test Runner
+Localpaste Test Runner
 
 Usage: ./test.sh [options]
 
@@ -67,7 +67,7 @@ done
 # Navigate to project root
 cd "$(dirname "$0")"
 
-echo -e "${YELLOW}Running QuickPaste Tests${NC}"
+echo -e "${YELLOW}Running Localpaste Tests${NC}"
 echo "========================"
 
 # Run tests

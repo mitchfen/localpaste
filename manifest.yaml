@@ -23,8 +23,8 @@ spec:
     spec:
       containers:
       - name: localpaste
-        image: localpaste:latest
-        imagePullPolicy: Never
+        image: ghcr.io/mitchfen/localpaste:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
           name: http
@@ -35,12 +35,6 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "200m"
-        volumeMounts:
-        - name: data
-          mountPath: /app
-      volumes:
-      - name: data
-        emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
