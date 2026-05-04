@@ -1,0 +1,43 @@
+# Go build artifacts
+localpaste
+main
+*.exe
+*.exe~
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Go binary output directories
+bin/
+dist/
+
+# Dependency and module files
+vendor/
+go.work.sum
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+paste.json
+
+# Temporary and log files
+*.log
+tmp/
+temp/
+.env
+.env.local
+
+# OS-specific
+.DS_Store
+Thumbs.db

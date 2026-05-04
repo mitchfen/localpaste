@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>QuickPaste</title>
+	<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px;
+		}
+		.container {
+			background: white;
+			border-radius: 8px;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+			width: 100%;
+			max-width: 600px;
+			padding: 40px;
+		}
+		h1 {
+			color: #333;
+			margin-bottom: 10px;
+			font-size: 28px;
+		}
+		.subtitle {
+			color: #666;
+			margin-bottom: 30px;
+			font-size: 14px;
+		}
+		.paste-section {
+			background: #f5f5f5;
+			padding: 20px;
+			border-radius: 6px;
+			margin-bottom: 30px;
+			animation: slideIn 0.3s ease-out;
+		}
+		@keyframes slideIn {
+			from {
+				opacity: 0;
+				transform: translateY(-10px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		.paste-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 15px;
+			padding-bottom: 10px;
+			border-bottom: 1px solid #ddd;
+		}
+		.paste-header p {
+			font-size: 12px;
+			color: #999;
+		}
+		.paste-content {
+			background: white;
+			padding: 15px;
+			border-radius: 4px;
+			font-family: 'Monaco', 'Menlo', monospace;
+			font-size: 14px;
+			line-height: 1.5;
+			color: #333;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+			max-height: 250px;
+			overflow-y: auto;
+			margin-bottom: 15px;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+		}
+		textarea {
+			padding: 15px;
+			border: 2px solid #e0e0e0;
+			border-radius: 6px;
+			font-family: 'Monaco', 'Menlo', monospace;
+			font-size: 14px;
+			resize: vertical;
+			min-height: 250px;
+			transition: border-color 0.2s;
+		}
+		textarea:focus {
+			outline: none;
+			border-color: #667eea;
+		}
+		button {
+			padding: 12px 24px;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			border: none;
+			border-radius: 6px;
+			font-size: 16px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: transform 0.2s, box-shadow 0.2s;
+		}
+		button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+		}
+		button:active {
+			transform: translateY(0);
+		}
+		button:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+		.small-btn {
+			padding: 8px 16px;
+			font-size: 14px;
+		}
+		.info {
+			color: #999;
+			font-size: 12px;
+			margin-top: 10px;
+		}
+
+		.htmx-request.htmx-settling button {
+			opacity: 0.6;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>QuickPaste</h1>
+		
+		<div id="paste-container">
+			{{if .Paste}}
+			<div class="paste-section">
+				<div class="paste-header">
+					<p>Current paste (expires in {{.Paste.ExpiresIn}})</p>
+				</div>
+				<div class="paste-content" id="paste-text">{{.Paste.Content}}</div>
+			</div>
+			{{end}}
+		</div>
+
+		<form hx-post="/" hx-target="#paste-container" hx-swap="beforeend swap:1s" hx-on::after-swap="this.reset()">
+			<textarea name="content" placeholder="Paste your text here..." required autofocus></textarea>
+			<button type="submit">Save New Paste</button>
+			<p class="info">✓ No login • ✓ Expires after 1 hour • ✓ Private network only</p>
+		</form>
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: localpaste-config
+  namespace: default
+data:
+  port: "8080"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localpaste
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: localpaste
+  template:
+    metadata:
+      labels:
+        app: localpaste
+    spec:
+      containers:
+      - name: localpaste
+        image: localpaste:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        volumeMounts:
+        - name: data
+          mountPath: /app
+      volumes:
+      - name: data
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: localpaste
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: localpaste
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
