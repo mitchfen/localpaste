@@ -59,7 +59,7 @@ func Read() (*Paste, error) {
 func Write(content string) (*Paste, error) {
 	paste := &Paste{
 		Content:   content,
-		ExpiresAt: time.Now().Add(1 * time.Hour),
+		ExpiresAt: time.Now().Add(10 * time.Minute),
 	}
 
 	data, err := json.Marshal(paste)
