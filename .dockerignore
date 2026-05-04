@@ -1,0 +1,11 @@
+.git
+.github
+.gitignore
+LICENSE
+manifest.yaml
+paste.json
+test.sh
+*.db
+*.sqlite
+*.sqlite3
+*.log
