@@ -1,7 +1,7 @@
 Tiny app that lets me send strings of text between devices **on my home network**.
 Useful when I need to send a quick password or URL between devices on where I'm not logged into my password manager.
 
-<img src="./screenshot.png" width="500px">
+<img src="./assets/icons/screenshot.png" width="500px">
 
 ### Tech stack
 

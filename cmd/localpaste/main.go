@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"localpaste/internal/paste"
+	"github.com/mitchfen/localpaste/internal/paste"
 )
 
 type Page struct {
