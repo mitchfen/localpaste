@@ -13,7 +13,7 @@ FROM scratch
 WORKDIR /app
 
 COPY --from=build /app/localpaste .
-COPY web/templates/ web/templates/
+COPY --from=build /source/assets/ assets/
 
 EXPOSE 8080
 

@@ -83,16 +83,16 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", handleIndex)
 	http.HandleFunc("/manifest.json", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "web/templates/manifest.json")
+		http.ServeFile(w, r, "assets/templates/manifest.json")
 	})
 	http.HandleFunc("/android-chrome-192x192.png", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "android-chrome-192x192.png")
+		http.ServeFile(w, r, "assets/icons/android-chrome-192x192.png")
 	})
 	http.HandleFunc("/android-chrome-512x512.png", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "android-chrome-512x512.png")
+		http.ServeFile(w, r, "assets/icons/android-chrome-512x512.png")
 	})
 	http.HandleFunc("/screenshot.png", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "screenshot.png")
+		http.ServeFile(w, r, "assets/icons/screenshot.png")
 	})
 
 	fmt.Println("LocalPaste running on http://localhost:8080")
