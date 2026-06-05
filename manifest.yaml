@@ -29,7 +29,7 @@ spec:
       containers:
       - name: localpaste
         image: ghcr.io/mitchfen/localpaste:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
           name: http
