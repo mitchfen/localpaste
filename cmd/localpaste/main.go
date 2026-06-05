@@ -82,7 +82,11 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", handleIndex)
+	http.Handle("/manifest.json", http.FileServer(http.Dir("web/templates")))
+	http.Handle("/android-chrome-192x192.png", http.FileServer(http.Dir(".")))
+	http.Handle("/android-chrome-512x512.png", http.FileServer(http.Dir(".")))
+	http.Handle("/screenshot.png", http.FileServer(http.Dir(".")))
 
-	fmt.Println("QuickPaste running on http://localhost:8080")
+	fmt.Println("LocalPaste running on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
