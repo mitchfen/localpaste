@@ -72,7 +72,7 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 		page.Paste = p
 	}
 
-	tmpl, err := template.ParseFiles("web/templates/index.html")
+	tmpl, err := template.ParseFiles("assets/templates/index.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
