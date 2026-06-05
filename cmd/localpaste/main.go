@@ -82,10 +82,18 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", handleIndex)
-	http.Handle("/manifest.json", http.FileServer(http.Dir("web/templates")))
-	http.Handle("/android-chrome-192x192.png", http.FileServer(http.Dir(".")))
-	http.Handle("/android-chrome-512x512.png", http.FileServer(http.Dir(".")))
-	http.Handle("/screenshot.png", http.FileServer(http.Dir(".")))
+	http.HandleFunc("/manifest.json", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "web/templates/manifest.json")
+	})
+	http.HandleFunc("/android-chrome-192x192.png", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "android-chrome-192x192.png")
+	})
+	http.HandleFunc("/android-chrome-512x512.png", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "android-chrome-512x512.png")
+	})
+	http.HandleFunc("/screenshot.png", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "screenshot.png")
+	})
 
 	fmt.Println("LocalPaste running on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
