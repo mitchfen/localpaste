@@ -64,8 +64,8 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Navigate to project root
-cd "$(dirname "$0")"
+# Navigate to src directory
+cd "$(dirname "$0")/src"
 
 echo -e "${YELLOW}Running Localpaste Tests${NC}"
 echo "========================"
@@ -73,7 +73,7 @@ echo "========================"
 # Run tests
 if [ "$COVERAGE" = "true" ]; then
     echo -e "\n${YELLOW}Running tests with coverage...${NC}"
-    go test ./internal/... -coverprofile=coverage.out $VERBOSE $QUIET
+    go test ./... -coverprofile=coverage.out $VERBOSE $QUIET
     
     if [ $? -eq 0 ]; then
         echo -e "\n${GREEN}✓ All tests passed!${NC}"
@@ -93,7 +93,7 @@ if [ "$COVERAGE" = "true" ]; then
         exit 1
     fi
 else
-    go test ./internal/... $VERBOSE $QUIET
+    go test ./... $VERBOSE $QUIET
     
     if [ $? -eq 0 ]; then
         echo -e "\n${GREEN}✓ All tests passed!${NC}"

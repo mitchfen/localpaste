@@ -2,11 +2,11 @@
 FROM golang:1.26-alpine AS build
 WORKDIR /source
 
-COPY go.mod ./
+COPY src/go.mod ./
 RUN go mod download
 
-COPY . .
-RUN GOOS=linux go build -ldflags="-s -w" -o /app/localpaste ./cmd/localpaste
+COPY src/ .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/localpaste .
 
 # Runtime Stage
 FROM scratch

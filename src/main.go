@@ -5,16 +5,14 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-
-	"github.com/mitchfen/localpaste/internal/paste"
 )
 
 type Page struct {
-	Paste *paste.Paste
+	Paste *Paste
 }
 
 func init() {
-	paste.StartCleanupRoutine()
+	StartCleanupRoutine()
 }
 
 func handleIndex(w http.ResponseWriter, r *http.Request) {
@@ -27,9 +25,9 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		m := paste.GetMutex()
+		m := GetMutex()
 		m.Lock()
-		p, err := paste.Write(content)
+		p, err := Write(content)
 		m.Unlock()
 
 		if err != nil {
@@ -58,9 +56,9 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	m := paste.GetMutex()
+	m := GetMutex()
 	m.Lock()
-	p, err := paste.Read()
+	p, err := Read()
 	m.Unlock()
 
 	if err != nil {
