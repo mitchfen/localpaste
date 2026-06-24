@@ -64,8 +64,8 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Navigate to src directory
-cd "$(dirname "$0")/src"
+# Navigate to script directory
+cd "$(dirname "$0")"
 
 echo -e "${YELLOW}Running Localpaste Tests${NC}"
 echo "========================"
